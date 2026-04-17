@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Дома в живописных местах Башкортостана</title>
+    <title>Дома в Башкортостане — продажа домов у озёр Банное и Чебачье</title>
+    <meta name="description" content="Продажа готовых домов в сёлах Ташбулатово и Абзаково рядом с озёрами Банное и Чебачье. Дома под ключ с газом, водой и инфраструктурой. Звоните +7-932-309-09-06">
+    <meta name="keywords" content="купить дом Башкортостан, дом у озера Банное, недвижимость Абзаково, продажа домов Ташбулатово">
+    <meta property="og:title" content="Дома в Башкортостане — у озёр Банное и Чебачье">
+    <meta property="og:description" content="Готовые дома в живописных местах Башкортостана. Газ, вода, инфраструктура. Ипотека возможна.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
 /* Design System */
 :root {
@@ -729,6 +738,42 @@ select.form-control {
   .nav-links {
     display: none;
   }
+  .nav-hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    background: none;
+    border: none;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-text);
+    transition: all var(--duration-normal) var(--ease-standard);
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-links.mobile-open {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-16);
+    gap: var(--space-12);
+    z-index: 999;
+  }
+  .nav-links.mobile-open a {
+    font-size: var(--font-size-lg);
+    padding: var(--space-8) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
   
   .form-row {
     flex-direction: column;
@@ -748,31 +793,36 @@ select.form-control {
   }
 }
 
-@font-face {
-  font-family: 'FKGroteskNeue';
-  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
-    format('woff2');
-}
+
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav" id="mainNav">
         <div class="container nav-container">
-            <div style="font-weight: var(--font-weight-bold); font-size: var(--font-size-lg);">🏠 Дома Башкортостана</div>
-            <ul class="nav-links">
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#catalog">Каталог</a></li>
-                <li><a href="#contact">Контакты</a></li>
+            <a href="#home" class="nav-logo">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-label="Логотип">
+                    <path d="M14 3L3 13h3v11h7v-7h2v7h7V13h3L14 3z" fill="var(--color-primary)" stroke="none"/>
+                    <rect x="11" y="17" width="6" height="7" rx="1" fill="var(--color-primary-hover)" opacity="0.7"/>
+                </svg>
+                <span>Дома Башкортостана</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="closeMobileMenu()">Главная</a></li>
+                <li><a href="#catalog" onclick="closeMobileMenu()">Каталог</a></li>
+                <li><a href="#contact" onclick="closeMobileMenu()">Контакты</a></li>
             </ul>
+            <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileMenu()" aria-label="Открыть меню">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
-            <h1>Дома в живописных местах Башкортостана</h1>
-            <p>Предлагаем готовые дома в селах Ташбулатово и Абзаково рядом с озерами Банное и Чебачье, горнолыжным комплексом Абзаково</p>
+            <h1>Дома у озёр Банное и Чебачье</h1>
+            <p>Готовые дома в сёлах Ташбулатово и Абзаково — горы, чистый воздух, развитая инфраструктура. 31 км от Магнитогорска.</p>
             
             <div class="features">
                 <div class="feature">
@@ -789,14 +839,18 @@ select.form-control {
                 </div>
             </div>
             
-            <button class="btn btn--primary btn--lg" onclick="scrollToSection('catalog')">Посмотреть дома</button>
+            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+                <button class="btn btn--primary btn--lg" onclick="scrollToSection('catalog')">Смотреть каталог</button>
+                <a href="tel:+79323090906" class="btn btn--outline btn--lg">📞 +7-932-309-09-06</a>
+            </div>
         </div>
     </section>
 
     <!-- Catalog Section -->
     <section id="catalog" class="section">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: var(--space-32);">Каталог домов</h2>
+            <h2 style="text-align: center; margin-bottom: var(--space-8);">Каталог домов</h2>
+            <p style="text-align:center; color:var(--color-text-secondary); margin-bottom: var(--space-24);">Нажмите на карточку для просмотра фото и подробностей</p>
             
             <!-- Filters -->
             <div class="filters">
@@ -827,6 +881,7 @@ select.form-control {
             <div style="text-align: center; margin-bottom: var(--space-32);">
                 <h3>Свяжитесь с нами</h3>
                 <p style="font-size: var(--font-size-lg); color: var(--color-text-secondary);">Телефон: <strong>+7-932-309-09-06</strong></p>
+                <p style="font-size: var(--font-size-lg); color: var(--color-text-secondary);">Email: <a href="mailto:ivanushkin@rtural.ru"><strong>ivanushkin@rtural.ru</strong></a></p>
                 
                 <div class="contact-buttons" style="justify-content: center;">
                     <a href="tel:+79323090906" class="btn btn--primary phone-btn">📞 Позвонить</a>
@@ -865,7 +920,7 @@ select.form-control {
                         <label class="form-label">Сообщение</label>
                         <textarea class="form-control" id="userMessage" rows="4" placeholder="Расскажите о ваших пожеланиях..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn--primary btn--full-width">Отправить заявку</button>
+                    <button type="submit" class="btn btn--primary btn--full-width">📩 Отправить заявку</button>
                 </form>
             </div>
         </div>
@@ -1033,7 +1088,7 @@ select.form-control {
             },
             {
                 id: 5,
-                name: "Объект №5 - Абзаково",
+                name: "Объект №5 - Абзаково - ✓ ПРОДАНО",
                 price: "6 799 000",
                 priceNum: 6799000,
                 address: "с. Абзаково, ул. А.Харисова 33/а",
@@ -1142,9 +1197,11 @@ select.form-control {
                 houseCard.className = 'house-card';
                 houseCard.onclick = () => showHouseDetails(house.id);
                 
+                const isSold = house.name && house.name.indexOf('ПРОДАНО') !== -1;
                 houseCard.innerHTML = `
                     <div class="house-image" style="${house.photos && house.photos.length > 0 ? `background-image: url('${house.cardImage || house.photos[0]}'); background-size: cover; background-position: center;` : ''}">
                         ${!house.photos || house.photos.length === 0 ? '🏠 Фото дома' : ''}
+                        ${isSold ? '<span class=\'house-sold-badge\'>✓ Продано</span>' : ''}
                     </div>
                     <div class="house-content">
                         <h3>${house.name}</h3>
@@ -1296,18 +1353,28 @@ select.form-control {
 
         // Filter houses by price
         function filterHouses() {
-            const priceFilter = document.getElementById('priceFilter').value;
-            
-            if (priceFilter === 'all') {
-                filteredHouses = [...houses];
-            } else {
-                const [min, max] = priceFilter.split('-').map(Number);
-                filteredHouses = houses.filter(house => {
-                    return house.priceNum >= min && (max ? house.priceNum <= max : true);
+            var priceFilter = document.getElementById('priceFilter').value;
+            var sortEl = document.getElementById('sortFilter');
+            var sortVal = sortEl ? sortEl.value : 'default';
+            var result = houses.slice();
+            if (priceFilter !== 'all') {
+                var parts = priceFilter.split('-').map(Number);
+                var fmin = parts[0], fmax = parts[1];
+                result = result.filter(function(h) {
+                    return fmax ? (h.priceNum >= fmin && h.priceNum <= fmax) : h.priceNum >= fmin;
                 });
             }
-            
+            if (sortVal === 'price-asc') result.sort(function(a,b){ return a.priceNum - b.priceNum; });
+            else if (sortVal === 'price-desc') result.sort(function(a,b){ return b.priceNum - a.priceNum; });
+            else if (sortVal === 'area-desc') result.sort(function(a,b){ return b.area - a.area; });
+            filteredHouses = result;
             renderHouses();
+            var countEl = document.getElementById('filterResultCount');
+            if (countEl) {
+                countEl.textContent = result.length !== houses.length
+                    ? 'Найдено: ' + result.length + ' из ' + houses.length + ' объектов'
+                    : '';
+            }
         }
 
         // Reset filters
@@ -1335,15 +1402,15 @@ select.form-control {
                 message: document.getElementById('userMessage').value
             };
             
-            // Create WhatsApp message
+            // Create Max message
             const houseText = formData.house ? houses.find(h => h.id == formData.house)?.name || '' : '';
             const message = `Здравствуйте! Меня зовут ${formData.name}.\n` +
                           `Мой телефон: ${formData.phone}\n` +
                           (houseText ? `Интересует: ${houseText}\n` : '') +
                           (formData.message ? `Сообщение: ${formData.message}` : '');
                           
-            const whatsappUrl = `https://max.im/79323090906?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+            const maxUrl = `https://max.im/79323090906?text=${encodeURIComponent(message)}`;
+            window.open(maxUrl, '_blank');
             
             // Reset form
             this.reset();
@@ -1388,5 +1455,57 @@ select.form-control {
         function closeLightbox(){var l=document.getElementById('lightbox');if(l){l.style.display='none';document.body.style.overflow='auto';}}
         document.addEventListener('DOMContentLoaded',function(){var c=document.getElementById('lightbox-close'),l=document.getElementById('lightbox');if(c)c.addEventListener('click',closeLightbox);if(l)l.addEventListener('click',function(e){if(e.target===l||e.target.id==='lightbox-close')closeLightbox();});document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});});
     </script>
+    <!-- Floating Max Button -->
+    <a href="https://max.im/79323090906" target="_blank" rel="noopener noreferrer" aria-label="Написать в Max" style="position:fixed;bottom:24px;right:20px;height:44px;padding:0 18px;background:#25d366;border-radius:999px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:1500;text-decoration:none;color:white;font-size:14px;font-weight:700;letter-spacing:0.3px;transition:transform 0.2s ease,box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        💬 Max
+    </a>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4 style="color:white; margin-bottom: var(--space-12);">🏠 Дома Башкортостана</h4>
+                    <p style="margin-bottom: var(--space-8);">Продажа готовых домов в живописных местах Республики Башкортостан</p>
+                    <p style="margin-bottom: 0;">Сёла Ташбулатово и Абзаково, 31 км от Магнитогорска</p>
+                </div>
+                <div>
+                    <h4 style="color:white; margin-bottom: var(--space-12);">Контакты</h4>
+                    <p style="margin-bottom: var(--space-8);">📞 <a href="tel:+79323090906">+7-932-309-09-06</a></p>
+                    <p style="margin-bottom: var(--space-8);">💬 <a href="https://max.im/79323090906" target="_blank" rel="noopener">Max</a></p>
+                    <p style="margin-bottom: var(--space-8);">📧 <a href="mailto:ivanushkin@rtural.ru">ivanushkin@rtural.ru</a></p>
+                    <p style="margin-bottom: 0;">⏰ Пн–Вс: 9:00–20:00</p>
+                </div>
+                <div>
+                    <h4 style="color:white; margin-bottom: var(--space-12);">Навигация</h4>
+                    <p style="margin-bottom: var(--space-8);"><a href="#home">Главная</a></p>
+                    <p style="margin-bottom: var(--space-8);"><a href="#catalog">Каталог домов</a></p>
+                    <p style="margin-bottom: 0;"><a href="#contact">Связаться с нами</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Дома Башкортостана. Все права защищены. | 
+                   <a href="#privacy" onclick="showPrivacy(event)">Политика конфиденциальности</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content" style="max-width:600px;">
+            <button class="modal-close" onclick="document.getElementById('privacyModal').classList.remove('active')">&times;</button>
+            <h2 style="margin-bottom:var(--space-16)">Политика конфиденциальности</h2>
+            <p>Настоящая Политика конфиденциальности описывает, как мы собираем, используем и защищаем Ваши персональные данные в соответствии с Федеральным законом № 152-ФЗ «О персональных данных».</p>
+            <h4 style="margin:var(--space-16) 0 var(--space-8)">Какие данные мы собираем</h4>
+            <p>При заполнении формы обратной связи мы собираем: имя и номер телефона. Эти данные используются исключительно для обратной связи с Вами по запросу.</p>
+            <h4 style="margin:var(--space-16) 0 var(--space-8)">Хранение данных</h4>
+            <p>Ваши данные не передаются третьим лицам и хранятся только в течение времени, необходимого для обработки Вашего запроса.</p>
+            <h4 style="margin:var(--space-16) 0 var(--space-8)">Ваши права</h4>
+            <p>Вы вправе запросить удаление Ваших персональных данных, направив запрос по телефону +7-932-309-09-06.</p>
+            <p style="margin-top:var(--space-16); color:var(--color-text-secondary); font-size:var(--font-size-sm)">Дата последнего обновления: январь 2025 г.</p>
+        </div>
+    </div>
+
 </body>
 </html>
